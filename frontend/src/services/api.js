@@ -1,73 +1,73 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_URL; 
+
 
 const api = axios.create({
-  baseURL: API_URL,
+  baseURL: API_URL, 
   withCredentials: true,
-  headers: {
-    'Content-Type': 'application/json',
-  },
+  headers: { 'Content-Type': 'application/json' },
 });
 
+// AUTH
 export const authAPI = {
   register: async (name, email, password) => {
-    const response = await api.post('/api/auth/register', { name, email, password });
-    return response.data;
+    const r = await api.post('/auth/register', { name, email, password });
+    return r.data;
   },
-  
+
   login: async (email, password) => {
-    const response = await api.post('/api/auth/login', { email, password });
-    return response.data;
+    const r = await api.post('/auth/login', { email, password });
+    return r.data;
   },
-  
+
   logout: async () => {
-    const response = await api.post('/api/auth/logout');
-    return response.data;
+    const r = await api.post('/auth/logout');
+    return r.data;
   },
-  
+
   getMe: async () => {
-    const response = await api.get('/api/auth/me');
-    return response.data;
+    const r = await api.get('/auth/me');
+    return r.data;
   },
 };
 
+// BOARDS
 export const boardAPI = {
   getAll: async () => {
-    const response = await api.get('/api/boards');
-    return response.data;
+    const r = await api.get('/boards');
+    return r.data;
   },
-  
+
   getById: async (id) => {
-    const response = await api.get(`/api/boards/${id}`);
-    return response.data;
+    const r = await api.get(`/boards/${id}`);
+    return r.data;
   },
-  
+
   create: async (name) => {
-    const response = await api.post('/api/boards', { name });
-    return response.data;
+    const r = await api.post('/boards', { name });
+    return r.data;
   },
-  
+
   invite: async (boardId, email) => {
-    const response = await api.post(`/api/boards/${boardId}/invite`, { email });
-    return response.data;
+    const r = await api.post(`/boards/${boardId}/invite`, { email });
+    return r.data;
   },
-  
+
   addCard: async (boardId, cardData) => {
-    const response = await api.post(`/api/boards/${boardId}/cards`, cardData);
-    return response.data;
+    const r = await api.post(`/boards/${boardId}/cards`, cardData);
+    return r.data;
   },
-  
+
   updateCard: async (boardId, cardId, cardData) => {
-    const response = await api.put(`/api/boards/${boardId}/cards/${cardId}`, cardData);
-    return response.data;
+    const r = await api.put(`/boards/${boardId}/cards/${cardId}`, cardData);
+    return r.data;
   },
-  
+
   getRecommendations: async (boardId, cardId) => {
-    const response = await api.get(`/api/boards/${boardId}/cards/${cardId}/recommendations`);
-    return response.data;
+    const r = await api.get(`/boards/${boardId}/cards/${cardId}/recommendations`);
+    return r.data;
   },
 };
 
 export default api;
-
