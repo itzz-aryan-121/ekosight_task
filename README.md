@@ -1,4 +1,4 @@
-# Task Board - Project README
+# Task Board 
 
 ## How to Run the Project
 
