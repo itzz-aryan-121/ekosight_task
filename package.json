@@ -1,4 +1,13 @@
 {
+  "name": "task-board",
+  "version": "1.0.0",
+  "description": "Task Board Application",
+  "scripts": {
+    "start": "cd backend && node server.js",
+    "install-backend": "cd backend && npm install",
+    "install-frontend": "cd frontend && npm install",
+    "install-all": "npm run install-backend && npm run install-frontend"
+  },
   "dependencies": {
     "lucide-react": "^0.554.0"
   }
