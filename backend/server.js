@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
 import boardRoutes from './routes/boardRoutes.js';
+import path from 'path';
 
 dotenv.config();
 
@@ -22,7 +23,10 @@ app.use(cors({
     credentials: true,
 }))
 
-app.options('*', cors());
+const __dirname = path.resolve();
+
+
+
 
 
 
@@ -32,6 +36,14 @@ app.use(cookieParser());
 
 app.use('/api/auth' , authRoutes);
 app.use('/api/boards' , boardRoutes);
+
+
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static(path.join(__dirname, '../frontend/dist')));
+    app.get(/^(?!\/api).*/, (req , res) => {
+        res.sendFile(path.join(__dirname, "../frontend" , "dist" , "index.html"));
+    });
+}
 
 
 app.listen(process.env.PORT , () => {
